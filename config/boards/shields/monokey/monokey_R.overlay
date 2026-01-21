@@ -6,7 +6,6 @@
 };
 
 &xiao_serial { status = "disabled"; };
-
 &kscan0 {
         col-gpios
             = <&xiao_d 10 GPIO_ACTIVE_HIGH>
@@ -22,8 +21,8 @@
 // 非マウスキーでAML解除
 &zip_temp_layer {
     excluded-positions = <
-        16 // K
-        17 // L
+        16 // J
+        17 // K
     >;
     require-prior-idle-ms = <200>;
     // トラボ誤爆防止
@@ -38,7 +37,6 @@
 
     };
 };
-
 &pinctrl {
     spi0_default: spi0_default {
         group1 {
@@ -65,7 +63,6 @@
     pinctrl-1 = <&spi0_sleep>;
     pinctrl-names = "default", "sleep";
     cs-gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
-
     trackball: trackball@0 {
         status = "okay";
         compatible = "pixart,pmw3610";
@@ -73,6 +70,6 @@
         spi-max-frequency = <2000000>;
         irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         scroll-layers = <5>;
+        cpi = <2000>;
     };
 };
-

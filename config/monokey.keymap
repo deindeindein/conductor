@@ -28,26 +28,6 @@
     combos {
         compatible = "zmk,combos";
 
-        tab {
-            bindings = <&kp TAB>;
-            key-positions = <11 12>;
-        };
-
-        shift_tab {
-            bindings = <&kp LS(TAB)>;
-            key-positions = <12 13>;
-        };
-
-        muhennkann {
-            bindings = <&to_layer_0 INT_MUHENKAN>;
-            key-positions = <11 10>;
-        };
-
-        double_quotation {
-            bindings = <&kp DOUBLE_QUOTES>;
-            key-positions = <20 21>;
-        };
-
         scroll {
             bindings = <&mo 5>;
             key-positions = <6 7>;
@@ -60,15 +40,6 @@
         };
     };
 
-    macros {
-        to_layer_0: to_layer_0 {
-            compatible = "zmk,behavior-macro-one-param";
-            #binding-cells = <1>;
-            bindings = <&to 0 &macro_param_1to1 &kp MACRO_PLACEHOLDER>;
-            label = "TO_LAYER_0";
-        };
-    };
-
     behaviors {
         right_click: right_click_behavior {
             compatible = "zmk,behavior-mouse-key";
@@ -76,7 +47,6 @@
             #binding-cells = <0>;
 
             // 右クリックは通常 MB2 に対応（ZMKの標準定義）
-
             bindings = <&mkp MB2>;
         };
     };
@@ -126,7 +96,7 @@
 
         MOUSE {
             bindings = <
-&trans  &trans  &trans  &trans  &trans            &trans  &trans    &mkp MB2  &trans  &trans
+&trans  &trans  &trans  &trans  &trans            &trans  &trans    &mkp MB2 &trans  &trans
 &trans  &trans  &trans  &trans  &trans            &trans  &mkp MB1  &trans    &trans  &trans
 &trans  &trans  &trans  &trans  &trans            &trans  &trans    &trans    &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans              &trans  &trans

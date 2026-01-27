@@ -84,50 +84,44 @@
 
             bindings = <
                 &macro_repeat_press   // 「押している間繰り返し送信」
-                &kp BACKSPACE
+                &&backspace_hold_layer 3 0
             >;
         };
     };
 
-    tap_dance {
-        compatible = "zmk,tap-dance";
-
-        td_backspace {
+behaviors {
+        // 【修正1】Tap Danceをbehaviorsの中に移動し、参照用のラベル(td_backspace:)を付与
+        td_backspace: td_backspace {
+            compatible = "zmk,tap-dance";
             label = "TD_BACKSPACE";
-            // 1回タップ、2回タップを定義
-            taps = <1>, <2>;
-
-            // 1回タップ => &kp BACKSPACE
-            // 2回タップ => マクロを呼び出し連打
-            bindings = <
-                &kp BACKSPACE
-                &macro_repeated_backspace
-            >;
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            // taps = <1>, <2>; ←この行は不要なので削除（bindingsの数で自動判定されます）
+            bindings = <&kp BACKSPACE>, <&macro_repeated_backspace>;
         };
-    };
 
-    behaviors {
         right_click: right_click_behavior {
             compatible = "zmk,behavior-mouse-key";
             label = "RIGHT_CLICK";
             #binding-cells = <0>;
-
-            // 右クリックは通常 MB2 に対応（ZMKの標準定義）
-
             bindings = <&mkp MB2>;
         };
 
+        // 【修正2】Hold-Tapの定義を修正
         backspace_hold_layer: backspace_hold_layer {
             compatible = "zmk,behavior-hold-tap";
             label = "BACKSPACE_HOLD_LAYER";
-
-            // [タップ動作]       [ホールド動作]
-            bindings = < &tap_dance_td_backspace >, < &mo 3 >;
-
-            // ホールド判定の時間（例：200ms）
+            
+            // 引数を2つ取る設定にします（第1引数：レイヤー番号、第2引数：Tap Dance用ダミー）
+            #binding-cells = <2>;
+            
             tapping-term-ms = <200>;
+            flavor = "balanced";
+            
+            // ZMKのルール: bindings = <ホールド時の動作>, <タップ時の動作>;
+            // 引数を固定値（&mo 3など）で書くことはできないため、汎用的な &mo と &td_backspace を指定します
+            bindings = <&mo>, <&td_backspace>;
         };
-
     };
 
     keymap {

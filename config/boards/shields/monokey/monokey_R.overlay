@@ -37,8 +37,8 @@
         // ▼ ここを変更しました ▼
         // zip_temp_layer（自動マウスレイヤー）の後に、zip_xy_scaler（速度調整）を追加
         // <&zip_xy_scaler 分子 分母> なので <3 2> は 1.5倍速、<2 1> は 2倍速になります
-        input-processors = <&zip_temp_layer 4 100000>
-                         , <&zip_xy_scaler 3 2>; 
+        input-processors = <&zip_temp_layer 4 700>
+                         , <&zip_xy_scaler 1 1>; 
     };
 };
 
